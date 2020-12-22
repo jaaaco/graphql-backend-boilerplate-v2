@@ -1,0 +1,90 @@
+type SimpleResponse {
+    success: Boolean!
+    message: String
+}
+
+enum UserRole {
+    ADMIN
+    STANDARD
+}
+
+type User {
+    username: String!
+    role: UserRole!
+}
+
+enum AppointmentStatus {
+    CREATED
+    REJECTED
+    APPROVED
+
+}
+
+type Appointment {
+    id: ID!
+    status: AppointmentStatus!
+    issuer: User
+    receiver: User
+}
+
+type Query {
+    me: User
+    appointments: [Appointment]
+}
+
+type SignInResponse {
+    token: String
+    result: SimpleResponse
+}
+
+type SignUpResponseErrors {
+    username: String
+    password: String
+    customField: String
+}
+
+type SignUpResponse {
+    errors: SignUpResponseErrors
+    result: SimpleResponse
+}
+
+type AppointmentResponseErrors {
+    startDate: String
+    endDate: String
+}
+
+type AppointmentResponse {
+    appointment: Appointment
+    result: SimpleResponse
+    errors: AppointmentResponseErrors
+}
+
+type Mutation {
+    signIn(
+        username: String!
+        password: String!
+    ): SimpleResponse
+
+    signUp(
+        username: String!
+        password: String!
+        passwordConfirmation: String!
+        customField: String
+    ): SignUpResponse
+
+    appointmentCreate(
+        description: String
+        startDate: String
+        endDate: String
+    ): AppointmentResponse
+
+    appointmentReject(
+        id: ID!
+    ): SimpleResponse
+
+    appointmentApprove(
+        id: ID!
+    ): SimpleResponse
+
+
+}

@@ -1,0 +1,35 @@
+{
+  "name": "graphql-backend-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "watch": "webpack --watch",
+    "start": "nodemon dist/main.js",
+    "code-style-test": "standard"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "apollo-server": "^2.19.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@graphql-tools/webpack-loader": "^6.3.1",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.6",
+    "standard": "^16.0.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "standard": {
+    "ignore": [
+      "./dist"
+    ]
+  }
+}
