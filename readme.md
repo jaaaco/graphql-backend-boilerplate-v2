@@ -1,16 +1,28 @@
 # First time setup
 
+* install nodejs
+* install Yarn
+* install Docker
+
 ```bash
 yarn install
 ```
 
 # Starting
 
-In first terminal start
+## Start Local MongoDB
+
+```bash
+./start-db.sh
+```
+
+In first terminal start build process in watch mode:
 
 ```bash
 yarn watch
 ```
+
+In second terminal start an application:
 
 ```bash
 yarn start

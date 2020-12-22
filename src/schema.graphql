@@ -85,6 +85,4 @@ type Mutation {
     appointmentApprove(
         id: ID!
     ): SimpleResponse
-
-
 }
