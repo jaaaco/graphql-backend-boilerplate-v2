@@ -63,13 +63,14 @@ const userSchema = {
   }
 }
 
-export async function signUp ({ email, password, passwordConfirmation }, { user: { sessionId } }) {
+export async function signUp ({ email, password, passwordConfirmation }) {
   email = email.toLowerCase()
 
   const validator = new Validator(userSchema)
   const errors = await validator.validate({ email, passwordConfirmation, password })
 
   if (!_.isEmpty(errors)) {
+    console.info({ errors })
     return {
       errors,
       result: {
@@ -108,14 +109,11 @@ export async function signUp ({ email, password, passwordConfirmation }, { user:
 const invalidUserResponse = {
   result: {
     success: false,
-    reason: {
-      code: 'invalidCredentials',
-      message: 'Invalid email or password'
-    }
+    message: 'Invalid email or password'
   }
 }
 
-export async function signIn ({ email, password }, { user: { sessionId } }) {
+export async function signIn ({ email, password }) {
   const user = await db.model('user').findOne({ email })
 
   if (!user) {
@@ -183,16 +181,8 @@ export function getUser (context) {
   }
 }
 
-export async function list ({ page: { limit, page }, range, search, order = 'created_desc' }, { timezone }) {
-  const conditions = getConditions({ range, search, columns: ['email'], timezone })
-  return {
-    items: db.model('user').find(conditions, null, { sort: getSort(order), limit, skip: limit * (page - 1) }),
-    pagination: {
-      limit,
-      page,
-      total: db.model('user').count(conditions)
-    }
-  }
+export async function list () {
+  return db.model('user').find()
 }
 
 export async function me (_, { user: { _id } }) {

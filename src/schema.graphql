@@ -9,7 +9,8 @@ enum UserRole {
 }
 
 type User {
-    username: String!
+    id: ID!
+    email: String!
     role: UserRole!
 }
 
@@ -17,7 +18,6 @@ enum AppointmentStatus {
     CREATED
     REJECTED
     APPROVED
-
 }
 
 type Appointment {
@@ -25,11 +25,15 @@ type Appointment {
     status: AppointmentStatus!
     issuer: User
     receiver: User
+    startTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
+    endTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
+    created(format: String = "YYYY-MM-DD @ HH:mm"): String!
 }
 
 type Query {
     me: User
     appointments: [Appointment]
+    users: [User]
 }
 
 type SignInResponse {
@@ -38,19 +42,20 @@ type SignInResponse {
 }
 
 type SignUpResponseErrors {
-    username: String
+    email: String
     password: String
-    customField: String
+    passwordConfirmation: String
 }
 
 type SignUpResponse {
     errors: SignUpResponseErrors
     result: SimpleResponse
+    token: String
 }
 
 type AppointmentResponseErrors {
-    startDate: String
-    endDate: String
+    startTime: String
+    endTime: String
 }
 
 type AppointmentResponse {
@@ -61,28 +66,27 @@ type AppointmentResponse {
 
 type Mutation {
     signIn(
-        username: String!
+        email: String!
         password: String!
-    ): SimpleResponse
+    ): SignInResponse
 
     signUp(
-        username: String!
+        email: String!
         password: String!
         passwordConfirmation: String!
-        customField: String
     ): SignUpResponse
 
     appointmentCreate(
         description: String
-        startDate: String
-        endDate: String
+        startTime: String
+        endTime: String
     ): AppointmentResponse
 
     appointmentReject(
         id: ID!
-    ): SimpleResponse
+    ): AppointmentResponse
 
     appointmentApprove(
         id: ID!
-    ): SimpleResponse
+    ): AppointmentResponse
 }

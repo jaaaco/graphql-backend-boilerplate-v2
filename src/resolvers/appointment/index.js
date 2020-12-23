@@ -5,3 +5,11 @@ export async function list() {
 export async function create () {
 
 }
+
+export async function appointmentApprove () {
+
+}
+
+export async function appointmentReject () {
+
+}
