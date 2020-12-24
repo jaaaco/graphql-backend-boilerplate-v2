@@ -30,8 +30,10 @@ export async function create ({ receiver, startTime: unformattedStartTime, endTi
     })
   }
 
-  const startTime = moment(unformattedStartTime)
-  const endTime = moment(unformattedEndTime)
+  const startTime = moment(unformattedStartTime, 'YYYY-MM-DD @ HH:mm')
+  const endTime = moment(unformattedEndTime, 'YYYY-MM-DD @ HH:mm')
+
+  console.info({ startTime, endTime })
 
   if (!startTime.isValid()) {
     return appointmentValidationErrors({

@@ -29,6 +29,7 @@ type Appointment {
     receiver: User!
     startTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
     endTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
+    duration(format: String = "minutes"): String
     created(format: String = "YYYY-MM-DD @ HH:mm"): String!
     description: String
 }

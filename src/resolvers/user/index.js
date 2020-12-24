@@ -185,8 +185,8 @@ export function getUser (context) {
   }
 }
 
-export async function list () {
-  return db.model('user').find()
+export async function list (_, { user: { role }}) {
+  return db.model('user').find(role !== 'ADMIN' ? { role: 'STANDARD'} : {})
 }
 
 export async function me (_, { user: { _id } }) {
