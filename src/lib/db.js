@@ -41,12 +41,19 @@ if (!mongoose.modelNames().length) {
 
   User.count().then(userCount => {
     if (userCount === 0) {
-      const user = new User({
+      const adminUser = new User({
         email: 'admin@example.com',
         passwordHash: hash('123456'),
         role: 'ADMIN'
       })
-      user.save().then(result => console.info('Admin user created: ', result)).catch(console.error)
+      adminUser.save().then(result => console.info('Admin user created: ', result)).catch(console.error)
+
+      const user = new User({
+        email: 'user@example.com',
+        passwordHash: hash('123456'),
+        role: 'STANDARD'
+      })
+      user.save().then(result => console.info('Standard user created: ', result)).catch(console.error)
     }
   })
 }

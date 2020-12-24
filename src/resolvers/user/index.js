@@ -102,7 +102,7 @@ export async function signUp ({ email, password, passwordConfirmation }) {
       success: true
     },
     token: generateToken(savedUser._id),
-    user
+    user: savedUser
   }
 }
 

@@ -42,6 +42,7 @@ type Query {
 type SignInResponse {
     token: String
     result: SimpleResponse
+    user: User
 }
 
 type SignUpResponseErrors {
@@ -54,6 +55,7 @@ type SignUpResponse {
     errors: SignUpResponseErrors
     result: SimpleResponse
     token: String
+    user: User
 }
 
 type AppointmentResponseErrors {
