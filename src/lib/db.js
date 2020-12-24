@@ -28,6 +28,8 @@ if (!mongoose.modelNames().length) {
       type: mongoose.Schema.Types.ObjectId,
       index: true
     },
+    startTime: Date,
+    endTime: Date,
     description: String,
     created: { type: Date, default: Date.now, index: true }
   })

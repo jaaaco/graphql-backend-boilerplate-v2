@@ -155,6 +155,10 @@ export function authorizedAdmin (context, fn, data) {
   return fn(data, { user, timezone: context.timezone })
 }
 
+export function get(userId) {
+  return db.model('user').findById(userId)
+}
+
 export function getUser (context) {
   let token = context.authorization
 

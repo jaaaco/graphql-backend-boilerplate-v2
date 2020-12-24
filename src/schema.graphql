@@ -12,6 +12,8 @@ type User {
     id: ID!
     email: String!
     role: UserRole!
+    created(format: String = "YYYY-MM-DD @ HH:mm"): String!
+    appointments: [Appointment]
 }
 
 enum AppointmentStatus {
@@ -23,11 +25,12 @@ enum AppointmentStatus {
 type Appointment {
     id: ID!
     status: AppointmentStatus!
-    issuer: User
-    receiver: User
+    issuer: User!
+    receiver: User!
     startTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
     endTime(format: String = "YYYY-MM-DD @ HH:mm"): String!
     created(format: String = "YYYY-MM-DD @ HH:mm"): String!
+    description: String
 }
 
 type Query {
@@ -56,6 +59,7 @@ type SignUpResponse {
 type AppointmentResponseErrors {
     startTime: String
     endTime: String
+    receiver: String
 }
 
 type AppointmentResponse {
@@ -80,6 +84,8 @@ type Mutation {
         description: String
         startTime: String
         endTime: String
+        "User ID"
+        receiver: ID!
     ): AppointmentResponse
 
     appointmentReject(
