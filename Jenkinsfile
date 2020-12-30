@@ -1,24 +1,18 @@
 pipeline {
   agent any
+  tools {nodejs "latest"}
   stages {
-    stages {
-        stage('Test') { 
-            steps {
-                sh '''curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n
-bash n lts'''
-                sh '''yarn install
+    stage('Test') { 
+          steps {
+              sh '''yarn install
 yarn code-style-test'''
-            }
-        }
-        stage('Build') {
-            steps {
-                sh '''curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n
-bash n lts'''
-                sh '''yarn install
+          }
+      }
+      stage('Build') {
+          steps {
+              sh '''yarn install
 ./node_modules/.bin/webpack'''
-            }
-        }
-        
-    }
+          }
+      }
   }
 }
