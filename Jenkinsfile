@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent ecs
   stages {
     stage('Test') { 
           steps {
